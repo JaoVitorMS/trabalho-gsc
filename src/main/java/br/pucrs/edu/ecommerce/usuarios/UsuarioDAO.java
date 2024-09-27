@@ -1,4 +1,5 @@
 package br.pucrs.edu.ecommerce.usuarios;
 
-public class Usuario {
+public interface UsuarioDAO<T> {
+
 }
