@@ -1,4 +1,4 @@
 package br.pucrs.edu.ecommerce.produtos;
 
-public interface Produtos {
+public class ProdutoDAO {
 }
