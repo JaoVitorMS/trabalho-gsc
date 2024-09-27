@@ -1,4 +1,4 @@
 package br.pucrs.edu.ecommerce.pedidos;
 
-public class PedidoDAO `{
+public class PedidoDAO{
 }
