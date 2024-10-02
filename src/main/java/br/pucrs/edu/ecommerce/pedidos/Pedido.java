@@ -1,6 +1,7 @@
 package br.pucrs.edu.ecommerce.pedidos;
 
 import br.pucrs.edu.ecommerce.produtos.Produto;
+import br.pucrs.edu.ecommerce.usuarios.Departamento;
 import br.pucrs.edu.ecommerce.usuarios.Usuario;
 
 import java.util.ArrayList;
