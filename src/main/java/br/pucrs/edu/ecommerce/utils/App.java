@@ -64,7 +64,49 @@ public class App {
                     break;
             }
         } while (opcao != 5);
-    } 
+    }
+
+    private void registrarPedido() {
+        if (usuarioAtual == null) {
+            System.out.println("Nenhum usuário selecionado! Por favor, escolha um usuário primeiro.");
+            return;
+        }
+
+        System.out.println("Registrar novo pedido para " + usuarioAtual.getNome() + ":");
+
+        List<Produto> produtosPedido = new ArrayList<>();
+        int opcaoProduto;
+
+        do {
+            System.out.print("Digite a descrição do produto: ");
+            String descricao = tec.nextLine();
+
+            System.out.print("Digite o valor unitário do produto: ");
+            double valorUnitario = tec.nextDouble();
+
+            System.out.print("Digite a quantidade do produto: ");
+            int quantidade = tec.nextInt();
+            tec.nextLine();
+
+            Produto produto = new Produto(descricao, valorUnitario, quantidade);
+            produtosPedido.add(produto);
+
+            System.out.print("Deseja adicionar mais produtos? (1-Sim, 0-Não): ");
+            opcaoProduto = tec.nextInt();
+            tec.nextLine();
+
+        } while (opcaoProduto == 1);
+
+
+        Pedido novoPedido = new Pedido(pedidos.size() + 1, produtosPedido, usuarioAtual, STATUS.PENDENTE);
+
+
+        pedidos.add(novoPedido);
+
+        System.out.println("Pedido registrado com sucesso!");
+    }
+
+
 
     private void escolherUsuario(){
         System.out.println("Escolher Usuário:");
