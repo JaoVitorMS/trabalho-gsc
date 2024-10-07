@@ -45,4 +45,15 @@ public class Produto {
     public void setValorTotal(double valorTotal) {
         this.valorTotal = valorTotal;
     }
+
+    @Override
+    public String toString() {
+        return String.format(
+            "Produto {\n" +
+            "  Descrição: '%s',\n" +
+            "  Valor Unitário: %.2f,\n" +
+            "  Quantidade: %d,\n" +
+            "  Valor Total: %.2f\n" +
+            "}", descricao, valorUnitario, quantidade, valorTotal);
+    }
 }
