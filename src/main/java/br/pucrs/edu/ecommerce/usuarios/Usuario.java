@@ -4,11 +4,13 @@ public class Usuario {
     private int id;
     private String nome;
     private String func;
+    private Departamento departamento;
 
-    public Usuario ( int id, String nome, String func ) {
+    public Usuario ( int id, String nome, String func, Departamento departamento ) {
         this.id = id;
         this.nome = nome;
         this.func = func;
+        this.departamento = departamento;
     }
 
     public int getId () {
@@ -34,4 +36,13 @@ public class Usuario {
     public void setFunc ( String func ) {
         this.func = func;
     }
+
+    public Departamento getDepartamento(){
+        return departamento;
+    }
+
+    public void setDepartamento(){
+        this.departamento =departamento;
+    }
+
 }
