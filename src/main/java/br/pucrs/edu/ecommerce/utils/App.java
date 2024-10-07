@@ -30,7 +30,8 @@ public class App {
             System.out.println("2. Registrar Pedido");
             System.out.println("3. Listar Pedidos");
             System.out.println("4. Aprovar/Rejeitar Pedido (Admin)");
-            System.out.println("5. Sair");
+            System.out.println("5. Gerar relatorio (Admin)");
+            System.out.println("6. Sair");
             System.out.print("Escolha uma opção: ");
             opcao = tec.nextInt();
             tec.nextLine();
@@ -55,8 +56,13 @@ public class App {
                         System.out.println("Você não tem permissão para esta ação.");
                     }
                     break;
-
                 case 5:
+                    gerarRelatorio();
+                    break
+
+
+
+                case 6:
                     System.out.println("Saindo do Sistema...");
                     break;
                 
