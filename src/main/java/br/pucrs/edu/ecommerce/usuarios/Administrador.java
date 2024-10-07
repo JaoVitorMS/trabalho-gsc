@@ -10,11 +10,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Administrador extends Usuario {
-    
+
     List<Pedido> pedidosTotais = new ArrayList<>();
     List<Pedido> pedidosAprovados = new ArrayList<>();
     List<Pedido> pedidosReprovados = new ArrayList<>();
-
 
 
     public Administrador ( int id, String nome, String func ) {
@@ -29,7 +28,7 @@ public class Administrador extends Usuario {
     Somente o administrador pode aprovar ou reprovar pedidos.
     Implementar a funcionalidade de visualização e avaliação de pedidos.
      */
-    private List<Pedido> getPedidosPendentes(List<Pedido> pedidos){
+    private List<Pedido> getPedidosPendentes ( List<Pedido> pedidos ) {
         List<Pedido> pedidosPendentes = new ArrayList<>();
 
         for (Pedido pedido : pedidos) {
@@ -41,32 +40,31 @@ public class Administrador extends Usuario {
     }
 
 
-
-    public boolean aprovarOuReprovarPedidos(String desc, int opcao, List<Pedido> pedidos){
+    public boolean aprovarOuReprovarPedidos ( String desc, int opcao, List<Pedido> pedidos ) {
         List<Pedido> pedidosPendentes = getPedidosPendentes(pedidos);
+        boolean done = false;
         if (opcao == 1) {
             for (Pedido pedido : pedidosPendentes) {
-                for(Produto p : pedido.getProdutos()){
-                    if(p.getDescricao().equals(desc)){
+                for (Produto p : pedido.getProdutos()) {
+                    if (p.getDescricao().equals(desc)) {
                         pedido.setStatus(aprovado);
-                        return true;
+                        done = true;
                     }
                 }
             }
         } else if (opcao == 2) {
             for (Pedido pedido : pedidosPendentes) {
-                for(Produto p : pedido.getProdutos()){
-                    if(p.getDescricao().equals(desc)){
+                for (Produto p : pedido.getProdutos()) {
+                    if (p.getDescricao().equals(desc)) {
                         pedido.setStatus(reprovado);
-                        return true;
+                        done = true;
                     }
                 }
             }
+        } else {
+            done = false;
         }
-        else{
-            return false;
-        }
-        
+
         for (Pedido pedido : pedidos) {
             if (pedido.getStatus() == aprovado) {
                 pedidosTotais.add(pedido);
@@ -79,7 +77,10 @@ public class Administrador extends Usuario {
                 pedidosReprovados.add(pedido);
             }
         }
+
+        return done;
     }
+
 
 
     public List<Pedido> listarPedidosEntreDatas (Date dataInicial, Date dataFinal, List<Pedido> pedidos){
