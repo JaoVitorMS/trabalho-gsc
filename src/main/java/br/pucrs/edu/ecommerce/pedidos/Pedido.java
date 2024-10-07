@@ -81,4 +81,17 @@ public class Pedido {
     public void setValorTotal(double valorTotal) {
         this.valorTotal = valorTotal;
     }
+
+    @Override
+    public String toString() {
+        return "Pedido {" +
+            "\n  Status: " + getStatus() +
+            "\n  Usuario Solicitante: " + getUsuarioSolicitante() +
+            "\n  Departamento: " + getDepartamento() +
+            "\n  Data do Pedido: " + getDataPedido() +
+            "\n  Data de Conclusao: " + getDataConclusao() +
+            "\n  Produtos: " + getProdutos() +
+            "\n  Valor Total: " + getValorTotal() +
+            "\n}";
+    }
 }
