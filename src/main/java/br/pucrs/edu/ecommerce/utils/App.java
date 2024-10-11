@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import br.pucrs.edu.ecommerce.pedidos.Pedido;
-import br.pucrs.edu.ecommerce.pedidos.STATUS;
+import br.pucrs.edu.ecommerce.pedidos.Status;
 import br.pucrs.edu.ecommerce.produtos.Produto;
 import br.pucrs.edu.ecommerce.usuarios.Administrador;
 import br.pucrs.edu.ecommerce.usuarios.Usuario;
@@ -123,7 +123,7 @@ public class App {
         System.out.println("Pedidos entregues:");
         boolean temPedidosEntregues = false;
         for (Pedido pedido : pedidos) {
-            if (pedido.getStatus() == STATUS.APROVADO) {
+            if (pedido.getStatus() == Status.APROVADO) {
                 System.out.println("Pedido ID: " + pedido.getId() + " | Usuário: " + pedido.getUsuarioSolicitante().getNome());
                 temPedidosEntregues = true;
             }

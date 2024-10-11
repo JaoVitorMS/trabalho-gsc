@@ -1,7 +1,7 @@
 package br.pucrs.edu.ecommerce.usuarios;
 
 import br.pucrs.edu.ecommerce.pedidos.Pedido;
-import br.pucrs.edu.ecommerce.pedidos.STATUS;
+import br.pucrs.edu.ecommerce.pedidos.Status;
 import br.pucrs.edu.ecommerce.produtos.Produto;
 
 import java.sql.Date;
@@ -20,9 +20,9 @@ public class Administrador extends Usuario {
         super(id, nome, func);
     }
 
-    STATUS pendente = STATUS.PENDENTE;
-    STATUS aprovado = STATUS.APROVADO;
-    STATUS reprovado = STATUS.REPROVADO;
+    Status pendente = Status.PENDENTE;
+    Status aprovado = Status.APROVADO;
+    Status reprovado = Status.REPROVADO;
 
     /*
     Somente o administrador pode aprovar ou reprovar pedidos.

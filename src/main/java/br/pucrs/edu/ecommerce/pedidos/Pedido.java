@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Pedido {
-    private STATUS status; //definicao do bagúi
+    private Status status; //definicao do bagúi
     private Usuario usuarioSolicitante;
     private Departamento departamento;
     private Date dataPedido;
@@ -26,11 +26,11 @@ public class Pedido {
     }
 
     //getters e setters
-    public STATUS getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(STATUS status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
