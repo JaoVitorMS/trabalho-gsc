@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import br.pucrs.edu.ecommerce.pedidos.Pedido;
+import br.pucrs.edu.ecommerce.pedidos.STATUS;
 import br.pucrs.edu.ecommerce.produtos.Produto;
 import br.pucrs.edu.ecommerce.usuarios.Administrador;
 import br.pucrs.edu.ecommerce.usuarios.Usuario;
@@ -14,13 +15,12 @@ public class App {
     private ArrayList<Pedido> pedidos;
     private Usuario usuarioAtual;
     private Scanner tec;
+    Administrador admin = new Administrador(1, "admin", "admin");
 
     public App() {
         this.usuarios = new ArrayList<>();
         this.pedidos = new ArrayList<>();
         this.tec = new Scanner(System.in);
-        // Exemplo de usuários
-        usuarios.add(new Administrador(1, "adm", "adm"));
     }
 
     public void iniciar() {
@@ -52,7 +52,12 @@ public class App {
 
                 case 4:
                     if (usuarioAtual instanceof Administrador) {
-                        aprovarRejeitarPedido();
+                        System.out.println("Digite a descricao do pedido:");
+                        String descricao = tec.nextLine();
+                        tec.nextLine();
+                        System.out.println("Digite 1 se aprova ou 2 se rejeita");
+                        int op = tec.nextInt();
+                        admin.aprovarOuReprovarPedidos(descricao, op, pedidos);
                     } else {
                         System.out.println("Você não tem permissão para esta ação.");
                     }
@@ -227,7 +232,7 @@ public class App {
     }
 
     private void gerarRelatorio() {
-        // Implementar lógica para gerar relatório
+        admin.relatorio(pedidos);
         System.out.println("Relatório gerado com sucesso!"); // Exemplo temporário
     }
 }
