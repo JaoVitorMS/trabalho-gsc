@@ -15,6 +15,7 @@ public class Pedido {
     private Date dataConclusao;
     private ArrayList<Produto> produtos;
     private double valorTotal;
+    private int id;
 
     //construtor
     public Pedido (Usuario usuario, Departamento departamento) {
@@ -23,6 +24,7 @@ public class Pedido {
         this.departamento = departamento;
         this.dataPedido = new Date(); //data atual
         this.produtos = new ArrayList<>();
+        this.id = id;
     }
 
     //getters e setters
@@ -80,6 +82,10 @@ public class Pedido {
 
     public void setValorTotal(double valorTotal) {
         this.valorTotal = valorTotal;
+    }
+
+    public int getId() {
+        return id;
     }
 
     @Override
