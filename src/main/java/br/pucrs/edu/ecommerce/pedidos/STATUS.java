@@ -1,6 +1,6 @@
 package br.pucrs.edu.ecommerce.pedidos;
 
-public enum STATUS {
+public enum Status {
     APROVADO,
     REPROVADO,
     PENDENTE

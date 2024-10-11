@@ -8,13 +8,14 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Pedido {
-    private STATUS status; //definicao do bagúi
+    private Status status; //definicao do bagúi
     private Usuario usuarioSolicitante;
     private Departamento departamento;
     private Date dataPedido;
     private Date dataConclusao;
     private ArrayList<Produto> produtos;
     private double valorTotal;
+    private int id;
 
     //construtor
     public Pedido (Usuario usuario, Departamento departamento) {
@@ -23,14 +24,15 @@ public class Pedido {
         this.departamento = departamento;
         this.dataPedido = new Date(); //data atual
         this.produtos = new ArrayList<>();
+        this.id = id;
     }
 
     //getters e setters
-    public STATUS getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(STATUS status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -80,5 +82,22 @@ public class Pedido {
 
     public void setValorTotal(double valorTotal) {
         this.valorTotal = valorTotal;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Pedido {" +
+            "\n  Status: " + getStatus() +
+            "\n  Usuario Solicitante: " + getUsuarioSolicitante() +
+            "\n  Departamento: " + getDepartamento() +
+            "\n  Data do Pedido: " + getDataPedido() +
+            "\n  Data de Conclusao: " + getDataConclusao() +
+            "\n  Produtos: " + getProdutos() +
+            "\n  Valor Total: " + getValorTotal() +
+            "\n}";
     }
 }

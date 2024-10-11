@@ -5,12 +5,11 @@ import java.util.List;
 import java.util.Scanner;
 
 import br.pucrs.edu.ecommerce.pedidos.Pedido;
+import br.pucrs.edu.ecommerce.pedidos.Status;
 import br.pucrs.edu.ecommerce.produtos.Produto;
 import br.pucrs.edu.ecommerce.usuarios.Administrador;
 import br.pucrs.edu.ecommerce.usuarios.Usuario;
 import br.pucrs.edu.ecommerce.usuarios.Departamento;
-
-
 
 public class App {
     private ArrayList<Usuario> usuarios;
@@ -18,15 +17,14 @@ public class App {
     private Usuario usuarioAtual;
     private Scanner tec;
     private ArrayList<Departamento> departamentos;
-
+    Administrador admin = new Administrador(1, "admin", "admin");
 
     public App() {
         this.usuarios = new ArrayList<>();
         this.pedidos = new ArrayList<>();
         this.departamentos = new ArrayList<>();
-        this.tec = tec;
-
         this.tec = new Scanner(System.in);
+
         // Exemplo de usuários
         usuarios.add(new Administrador(1, "adm", "adm"));
 
@@ -64,8 +62,6 @@ public class App {
         usuarios.add(new Usuario(16, "Juliana Costa", "Funcionária", departamentos.get(14)));
     }
 
-    }
-
     public void iniciar() {
         int opcao;
         do {
@@ -75,10 +71,11 @@ public class App {
             System.out.println("3. Listar Pedidos");
             System.out.println("4. Aprovar/Rejeitar Pedido (Admin)");
             System.out.println("5. Gerar Relatório (Admin)");
-            System.out.println("6. Sair");
+            System.out.println("6. Registrar Pedido");  // Nova opção adicionada aqui
+            System.out.println("7. Sair");
             System.out.print("Escolha uma opção: ");
             opcao = tec.nextInt();
-            tec.nextLine();
+            tec.nextLine();  // Limpar o buffer do Scanner
 
             switch (opcao) {
                 case 1:
@@ -95,7 +92,11 @@ public class App {
 
                 case 4:
                     if (usuarioAtual instanceof Administrador) {
-                        aprovarRejeitarPedido();
+                        System.out.println("Digite a descricao do pedido:");
+                        String descricao = tec.nextLine();
+                        System.out.println("Digite 1 se aprova ou 2 se rejeita");
+                        int op = tec.nextInt();
+                        admin.aprovarOuReprovarPedidos(descricao, op, pedidos);
                     } else {
                         System.out.println("Você não tem permissão para esta ação.");
                     }
@@ -106,6 +107,10 @@ public class App {
                     break;
 
                 case 6:
+                    registrarPedido();  // Chama o método registrarPedido aqui
+                    break;
+
+                case 7:
                     System.out.println("Saindo do Sistema...");
                     break;
 
@@ -113,7 +118,48 @@ public class App {
                     System.out.println("Opção inválida, tente novamente.");
                     break;
             }
-        } while (opcao != 6);
+        } while (opcao != 7);
+    }
+
+    // Método para registrar pedido
+    private void registrarPedido() {
+        if (usuarioAtual == null) {
+            System.out.println("Nenhum usuário foi escolhido.");
+            return;
+        }
+
+        List<Produto> produtosPedido = new ArrayList<>();
+
+        while (true) {
+            System.out.print("Digite a descrição do produto (ou 'sair' para finalizar): ");
+            String descricao = tec.nextLine();
+
+            if (descricao.equalsIgnoreCase("sair")) {
+                break;
+            }
+
+            System.out.print("Digite a quantidade do produto: ");
+            int quantidade = tec.nextInt();
+            tec.nextLine();  // Limpar o buffer do scanner
+
+            System.out.print("Digite o valor unitário do produto: ");
+            double valorUnitario = tec.nextDouble();
+            tec.nextLine();  // Limpar o buffer do scanner
+
+            Produto produto = new Produto(descricao, quantidade, valorUnitario);
+            produtosPedido.add(produto);
+        }
+
+        if (produtosPedido.isEmpty()) {
+            System.out.println("Nenhum produto foi adicionado ao pedido.");
+            return;
+        }
+
+        Pedido novoPedido = new Pedido(pedidos.size() + 1, usuarioAtual, produtosPedido);
+        pedidos.add(novoPedido);
+
+        System.out.println("Pedido registrado com sucesso!");
+        System.out.println("Pedido ID: " + novoPedido.getId());
     }
 
     private void avaliarPedidos() {
@@ -161,7 +207,7 @@ public class App {
         System.out.println("Pedidos entregues:");
         boolean temPedidosEntregues = false;
         for (Pedido pedido : pedidos) {
-            if (pedido.getStatus() == STATUS.APROVADO) {
+            if (pedido.getStatus() == Status.APROVADO) {
                 System.out.println("Pedido ID: " + pedido.getId() + " | Usuário: " + pedido.getUsuarioSolicitante().getNome());
                 temPedidosEntregues = true;
             }
@@ -270,7 +316,7 @@ public class App {
     }
 
     private void gerarRelatorio() {
-        // Implementar lógica para gerar relatório
+        admin.relatorio(pedidos);
         System.out.println("Relatório gerado com sucesso!"); // Exemplo temporário
     }
 }
