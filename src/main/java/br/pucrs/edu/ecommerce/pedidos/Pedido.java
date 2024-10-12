@@ -18,14 +18,24 @@ public class Pedido {
     private int id;
 
     //construtor
-    public Pedido (Usuario usuario, Departamento departamento) {
-        this.status = status.PENDENTE; //define como pendente todos os novos pedidos
+    public Pedido(int id, Usuario usuario, Departamento departamento, ArrayList<Produto> produtos) {
+        this.id = id;
+        this.status = Status.PENDENTE; // Define como pendente todos os novos pedidos
         this.usuarioSolicitante = usuario;
         this.departamento = departamento;
-        this.dataPedido = new Date(); //data atual
-        this.produtos = new ArrayList<>();
-        this.id = id;
+        this.dataPedido = new Date(); // Data atual
+        this.produtos = produtos; // Adiciona a lista de produtos
+        this.valorTotal = calcularValorTotal(); // Calcula o valor total dos produtos
     }
+    
+    private double calcularValorTotal() {
+        double total = 0;
+        for (Produto produto : produtos) {
+            total += produto.getValorUnitario() * produto.getQuantidade();
+        }
+        return total;
+    }
+    
 
     //getters e setters
     public Status getStatus() {

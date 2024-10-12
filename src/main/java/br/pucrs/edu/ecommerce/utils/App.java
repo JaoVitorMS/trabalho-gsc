@@ -127,40 +127,59 @@ public class App {
             System.out.println("Nenhum usuário foi escolhido.");
             return;
         }
-
+    
+        // Exibir lista de departamentos
+        System.out.println("Selecione o departamento do pedido:");
+        for (int i = 0; i < departamentos.size(); i++) {
+            System.out.println((i + 1) + ". " + departamentos.get(i).getNome());
+        }
+    
+        // Permitir que o usuário escolha um departamento
+        int escolhaDepartamento = tec.nextInt();
+        tec.nextLine(); // limpar o buffer do Scanner
+    
+        if (escolhaDepartamento < 1 || escolhaDepartamento > departamentos.size()) {
+            System.out.println("Departamento inválido.");
+            return;
+        }
+    
+        Departamento departamentoEscolhido = departamentos.get(escolhaDepartamento - 1);
+        
         List<Produto> produtosPedido = new ArrayList<>();
-
+    
         while (true) {
             System.out.print("Digite a descrição do produto (ou 'sair' para finalizar): ");
             String descricao = tec.nextLine();
-
+    
             if (descricao.equalsIgnoreCase("sair")) {
                 break;
             }
-
+    
             System.out.print("Digite a quantidade do produto: ");
             int quantidade = tec.nextInt();
             tec.nextLine();  // Limpar o buffer do scanner
-
+    
             System.out.print("Digite o valor unitário do produto: ");
             double valorUnitario = tec.nextDouble();
             tec.nextLine();  // Limpar o buffer do scanner
-
-            Produto produto = new Produto(descricao, quantidade, valorUnitario);
+    
+            Produto produto = new Produto(descricao, valorUnitario, quantidade);
             produtosPedido.add(produto);
         }
-
+    
         if (produtosPedido.isEmpty()) {
             System.out.println("Nenhum produto foi adicionado ao pedido.");
             return;
         }
-
-        Pedido novoPedido = new Pedido(pedidos.size() + 1, usuarioAtual, produtosPedido);
+    
+        // Criação do novo pedido com o ID gerado e departamento escolhido
+        Pedido novoPedido = new Pedido(pedidos.size() + 1, usuarioAtual, departamentoEscolhido, produtosPedido);
         pedidos.add(novoPedido);
-
+        
         System.out.println("Pedido registrado com sucesso!");
         System.out.println("Pedido ID: " + novoPedido.getId());
     }
+    
 
     private void avaliarPedidos() {
         int opcao;
