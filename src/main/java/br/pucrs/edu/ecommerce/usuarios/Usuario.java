@@ -13,6 +13,12 @@ public class Usuario {
         this.departamento = departamento;
     }
 
+    public Usuario(int id, String nome, String func) {
+        this.id = id;
+        this.nome = nome;
+        this.func = func;
+    }
+
     public int getId () {
         return id;
     }

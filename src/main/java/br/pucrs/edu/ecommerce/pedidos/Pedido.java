@@ -6,6 +6,7 @@ import br.pucrs.edu.ecommerce.usuarios.Usuario;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Pedido {
     private Status status; //definicao do bagúi
@@ -13,12 +14,12 @@ public class Pedido {
     private Departamento departamento;
     private Date dataPedido;
     private Date dataConclusao;
-    private ArrayList<Produto> produtos;
+    private List<Produto> produtos;
     private double valorTotal;
     private int id;
 
     //construtor
-    public Pedido(int id, Usuario usuario, Departamento departamento, ArrayList<Produto> produtos) {
+    public Pedido(int id, Usuario usuario, Departamento departamento, List<Produto> produtos) {
         this.id = id;
         this.status = Status.PENDENTE; // Define como pendente todos os novos pedidos
         this.usuarioSolicitante = usuario;
@@ -78,7 +79,7 @@ public class Pedido {
         this.dataConclusao = dataConclusao;
     }
 
-    public ArrayList<Produto> getProdutos() {
+    public List<Produto> getProdutos() {
         return produtos;
     }
 
